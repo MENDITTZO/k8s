@@ -9,12 +9,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: vue001kube
+      app: vue001dep
 
   template:
     metadata:
       labels:
-        app: vue001kube
+        app: vue001dep
 
     spec:
       containers:

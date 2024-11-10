@@ -16,4 +16,4 @@ spec:
       nodePort: 30000 # 클러스터의 모든 노드에서 이 포트를 통해 서비스에 접근할 수 있다.(30000 ~ 32767)
 
   selector:
-    app: vue001kube 
+    app: vue001dep

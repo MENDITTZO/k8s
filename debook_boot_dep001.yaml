@@ -9,7 +9,7 @@ spec:
 
   selector:
     matchLabels:
-      app: boot001kube
+      app: boot001dep
   
   # 3개의 파드를 생성. >> 무중단 배포를 위해 3개
   replicas: 3
@@ -18,7 +18,7 @@ spec:
     metadata:
       labels:
         # 생성될 파드에 'app=boot001kube' 레이블을 부여.
-        app: boot001kube
+        app: boot001dep
 
     spec:
       containers:

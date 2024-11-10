@@ -15,4 +15,4 @@ spec:
       nodePort: 30001 # 클러스터의 모든 노드에서 이 포트를 통해 서비스에 접근할 수 있다.(30000 ~ 32767)
 
   selector:
-    app: boot001kube
+    app: boot001dep
