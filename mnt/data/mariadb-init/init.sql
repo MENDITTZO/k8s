@@ -1,4 +1,3 @@
-CREATE DATABASE debook_db;
 USE debook_db;
 -- Drop tables in reverse order of dependency
 DROP TABLE IF EXISTS `report`;
