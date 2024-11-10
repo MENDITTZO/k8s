@@ -155,7 +155,7 @@ ALTER TABLE `restriction_history`
 	ADD CONSTRAINT `FK_User_TO_Restriction_history_1` 
 	FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 	
-LOAD DATA LOCAL INFILE 'C:/book.csv'  	-- 입력할 파일의 경로
+LOAD DATA LOCAL INFILE '/docker-entrypoint-initdb.d/book.csv'  	-- 입력할 파일의 경로
 INTO TABLE book            -- 입력받을 테이블의 이름
 FIELDS                            -- 라인 내의 필드들을 구분하는 방법
     TERMINATED BY ','              -- 각 필드가 끝나는 구분문자를 지정해줌

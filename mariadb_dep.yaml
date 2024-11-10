@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: mariadb
   namespace: default
-  labels:
-    app: mariadb
 spec:
   replicas: 1
   selector:
@@ -17,22 +15,18 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: mariadb:latest # MariaDB 공식 이미지
+          image: mariadb:latest
           ports:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: "root" # 루트 비밀번호 설정
+              value: "root"
             - name: MYSQL_DATABASE
-              value: "debook_db"  # 초기화할 데이터베이스 이름
-            - name: MYSQL_USER
-              value: "debook"
-            - name: MYSQL_PASSWORD
-              value: "debook"
+              value: "debook_db"
           volumeMounts:
             - name: init-sql-volume
               mountPath: /docker-entrypoint-initdb.d
       volumes:
-      - name: init-sql-volume
-        persistentVolumeClaim:
-          claimName: mariadb-pvc
+        - name: init-sql-volume
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
