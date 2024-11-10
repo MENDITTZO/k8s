@@ -30,9 +30,9 @@ spec:
             - name: MYSQL_PASSWORD
               value: "root"
           volumeMounts:
-            - name: mariadb-data
-              mountPath: /var/lib/mysql
+            - name: init-sql-volume
+              mountPath: /docker-entrypoint-initdb.d  # MariaDB 초기화 디렉토리
       volumes:
-        - name: mariadb-data
-          persistentVolumeClaim:
-            claimName: mariadb-pvc
+      - name: init-sql-volume
+        persistentVolumeClaim:
+          claimName: mariadb-pvc
