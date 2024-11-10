@@ -9,4 +9,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath: # 클러스터 노드의 로컬 경로
-    path: mnt/data/mariadb-init   # 클러스터 노드의 디렉토리
+    path: /mnt/data/mariadb-init   # 클러스터 노드의 디렉토리
