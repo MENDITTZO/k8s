@@ -20,7 +20,7 @@ spec:
                 port:
                   number: 8000
           # 두번째 패스 규칙 >> boot로 시작하는 http 요청은 모두 boot 서비스로 전송
-          - path: /boot(/|$)(.*)
+          - path: /api/v1(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
