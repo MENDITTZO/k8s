@@ -27,3 +27,11 @@ spec:
                 name: boot001ser
                 port:
                   number: 8001
+          # 세번째 패스 규칙 >> 카카오에서 리다이렉트 해추는 콜백 api주소는 boot 서비스로 전송한다.
+          - path: /api/v1/auth/callback
+            pathType: Prefix
+            backend:
+              service:
+                name: boot001ser  # Spring Boot 서비스 이름
+                port:
+                  number: 8001  # Spring Boot 서비스 포트 번호
