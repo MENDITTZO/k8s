@@ -5,8 +5,8 @@ metadata:
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    # 매칭된 경로에서 /boot 부분을 제거하고 나머지 부분만 백엔드 서비스로 전달.
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    # 매칭된 경로에서 /boot 부분을 제거하고 나머지 부분만 백엔드 서비스로 전달.
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
