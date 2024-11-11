@@ -29,73 +29,83 @@ spec:
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: db.port
+                  name: api-key-secret
+                  key: DB_PORT
             - name: DB_DBNAME
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: db.dbname
+                  name: api-key-secret
+                  key: DB_DBNAME
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: db.username
+                  name: api-key-secret
+                  key: DB_USERNAME
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: db.password
+                  name: api-key-secret
+                  key: DB_PASSWORD
             - name: KAKAO_CLIENT_ID_REST_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: kakao.client_id.rest_api_key
+                  name: api-key-secret
+                  key: KAKAO_CLIENT_ID_REST_API_KEY
             - name: KAKAO_REDIRECT_URI
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: kakao.redirect_uri
+                  name: api-key-secret
+                  key: KAKAO_REDIRECT_URI
             - name: TOKEN_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: token.secret
+                  name: api-key-secret
+                  key: TOKEN_SECRET
             - name: TOKEN_ACCESS_TOKEN_EXPIRATION_TIME
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: token.access_token_expiration_time
+                  name: api-key-secret
+                  key: TOKEN_ACCESS_TOKEN_EXPIRATION_TIME
             - name: TOKEN_REFRESH_TOKEN_EXPIRATION_TIME
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: token.refresh_token_expiration_time
+                  name: api-key-secret
+                  key: TOKEN_REFRESH_TOKEN_EXPIRATION_TIME
             - name: REDIS_DATA_HOST
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: redis.data.host
+                  name: api-key-secret
+                  key: REDIS_DATA_HOST
             - name: REDIS_DATA_PORT
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: redis.data.port
+                  name: api-key-secret
+                  key: REDIS_DATA_PORT
             - name: S3_BUCKET
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: s3.bucket
+                  name: api-key-secret
+                  key: S3_BUCKET
             - name: IM_ACCESS
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: im.access
+                  name: api-key-secret
+                  key: IM_ACCESS
             - name: IM_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: debook-secret
-                  key: im.secret
+                  name: api-key-secret
+                  key: IM_SECRET
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-key-secret
+                  key: GEMINI_API_KEY
+            - name: GEMINI_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-key-secret
+                  key: GEMINI_API_URL
 
           ports:
             - containerPort: 8080 # 컨테이너가 리스닝할 포트 번호를 지정한다.
