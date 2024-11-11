@@ -29,7 +29,7 @@ spec:
                   number: 8080
           # 세번째 패스 규칙 >> 카카오에서 리다이렉트 해추는 콜백 api주소는 boot 서비스로 전송한다.
           - path: /api/v1/auth/callback
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: boot001ser
