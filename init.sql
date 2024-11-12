@@ -3,10 +3,10 @@ USE debook_db;
 DROP TABLE IF EXISTS `report`;
 DROP TABLE IF EXISTS `redis_token_blacklist`;
 DROP TABLE IF EXISTS `restriction_history`;
-DROP TABLE IF EXISTS `bookRecommend`;
-DROP TABLE IF EXISTS `chatRoomUserInfo`;
+DROP TABLE IF EXISTS `book_recommend`;
+DROP TABLE IF EXISTS `chatroom_user_info`;
 DROP TABLE IF EXISTS `review`;
-DROP TABLE IF EXISTS `chatRoom`;
+DROP TABLE IF EXISTS `chatroom`;
 DROP TABLE IF EXISTS `book`;
 DROP TABLE IF EXISTS `token`;
 DROP TABLE IF EXISTS `user`;
@@ -52,7 +52,7 @@ CREATE TABLE `book` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-CREATE TABLE `chatRoom` (
+CREATE TABLE `chatroom` (
 	`chatroom_id` BIGINT NOT NULL AUTO_INCREMENT,
 	`book_id` BIGINT NOT NULL,
 	`open_datetime` DATETIME NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `chatRoom` (
 	PRIMARY KEY (`chatroom_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `chatroomuserinfo` (
+CREATE TABLE `chatroom_user_info` (
 	`chatroom_info_id` BIGINT NOT NULL AUTO_INCREMENT,
 	`chatroom_id` BIGINT NOT NULL,
 	`user_id` BIGINT NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE `report` (
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `bookRecommend` (
+CREATE TABLE `book_recommend` (
 	`recommend_id` BIGINT NOT NULL AUTO_INCREMENT,
 	`question_content` TEXT NULL,
 	`response_content` TEXT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `redis_token_blacklist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Add foreign keys after table creation
-ALTER TABLE `chatRoom` 
+ALTER TABLE `chatroom` 
 	ADD CONSTRAINT `FK_Book_TO_ChatRoom_1` 
 	FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`);
 
@@ -133,7 +133,7 @@ ALTER TABLE `report`
 	ADD CONSTRAINT `FK_review_TO_Report_1` 
 	FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`),
 	ADD CONSTRAINT `FK_ChatRoom_TO_Report_1` 
-	FOREIGN KEY (`chatroom_id`) REFERENCES `chatRoom` (`chatroom_id`),
+	FOREIGN KEY (`chatroom_id`) REFERENCES `chatroom` (`chatroom_id`),
    ADD CONSTRAINT `FK_User_TO_Report_1`
    FOREIGN KEY (`reporter_user_id`) REFERENCES `user` (`user_id`),
    ADD CONSTRAINT `FK_User_TO_Report_2` 
@@ -145,9 +145,9 @@ ALTER TABLE `review`
 	ADD CONSTRAINT `FK_User_TO_Review_1` 
 	FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
-ALTER TABLE `chatRoomUserInfo` 
+ALTER TABLE `chatroom_user_info` 
 	ADD CONSTRAINT `FK_ChatRoom_TO_ChatRoomUserInfo_1` 
-	FOREIGN KEY (`chatroom_id`) REFERENCES `chatRoom` (`chatroom_id`),
+	FOREIGN KEY (`chatroom_id`) REFERENCES `chatroom` (`chatroom_id`),
 	ADD CONSTRAINT `FK_user_TO_ChatRoomUserInfo_1` 
 	FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
@@ -176,7 +176,7 @@ INSERT INTO `user` (`user_id`, `email`, `nickname`, `status`, `create_datetime`,
 	(8, 'fiona.white@example.com', 'fi', 'PENDIN', '2024-01-08 17:00:00', 'kakao', 'https://img.icons8.com/?size=100&id=hlS7OQRrXwiG&format=png&color=000000', NULL, 8),
 	(9, 'george.hall@example.com', 'geo', 'PENDIN', '2024-01-09 18:00:00', 'kakao', 'https://img.icons8.com/?size=100&id=hlS7OQRrXwiG&format=png&color=000000', NULL, 9),
 	(10, 'hannah.jones@example.com', 'hanny', 'PENDIN', '2024-01-10 19:00:00', 'kakao', 'https://img.icons8.com/?size=100&id=hlS7OQRrXwiG&format=png&color=000000', NULL, 10);
-INSERT INTO `chatRoom` (`chatroom_id`, `book_id`, `open_datetime`, `max_member_count`, `title`, `status`) VALUES
+INSERT INTO `chatroom` (`chatroom_id`, `book_id`, `open_datetime`, `max_member_count`, `title`, `status`) VALUES
 (1, 6352228, '2024-11-01 10:00:00', 10, '고전문학 독서 모임', 'active'),
 (2, 6352229, '2024-11-02 14:00:00', 10, '과학 서적 토론', 'active'),
 (3, 6352230, '2024-11-03 18:30:00', 3, '역사책 함께 읽기', 'active'),
@@ -186,7 +186,7 @@ INSERT INTO `chatRoom` (`chatroom_id`, `book_id`, `open_datetime`, `max_member_c
 (7, 6352234, '2024-11-07 11:00:00', 9, '에세이 함께 나눔', 'active'),
 (8, 6352235, '2024-11-08 17:00:00', 5, '비문학 독서 모임', 'closed'),
 (9, 6352236, '2024-11-09 13:00:00', 6, '어린이 책 읽기', 'active');
-INSERT INTO `chatRoomUserInfo` (`chatroom_info_id`, `chatroom_id`, `user_id`, `member_join_datetime`, `chatroomUser_info_status`) VALUES
+INSERT INTO `chatroom_user_info` (`chatroom_info_id`, `chatroom_id`, `user_id`, `member_join_datetime`, `chatroomUser_info_status`) VALUES
 (1, 1, 1, '2024-11-01 10:00:00', 'active'),
 (2, 1, 2, '2024-11-01 10:30:00', 'active'),
 (3, 1, 3, '2024-11-01 11:00:00', 'active'),
@@ -220,7 +220,7 @@ INSERT INTO `review` (`review_id`, `book_id`, `user_id`, `create_datetime`, `upd
 	(9, 6352236, 9, '2024-11-01 14:00:00', NULL, NULL, '마음이 허기질 때 - 따뜻한 에세이', '저자의 따뜻한 어린 시절 음식에 대한 이야기가 마음을 울립니다.', 4, 'DELETED'),
 	(10, 6352228, 10, '2024-11-01 14:30:00', NULL, NULL, '너에게 목소리를 보낼게 - 감동의 에세이', '성우 이용신의 진솔한 이야기가 인상적이었습니다. 추천합니다.', 5, 'UPDATED');
 
-INSERT INTO `bookRecommend` (`recommend_id`, `question_content`, `response_content`, `question_datetime`, `user_id`) VALUES
+INSERT INTO `book_recommend` (`recommend_id`, `question_content`, `response_content`, `question_datetime`, `user_id`) VALUES
 (1, '지금 읽기 좋은 감성적인 소설을 추천해 주세요.', '현재 계절에 어울리는 감성적인 소설로 <달러구트 꿈 백화점>을 추천드립니다. 잠들어야만 입장할 수 있는 독특한 이야기입니다.', '2024-11-01 10:00:00', 1),
 (2, '비즈니스 모델을 설명해주는 경제 책이 있을까요?', '미래 경제 모델을 다룬 <그린 스완>을 추천드립니다. 회복과 재생을 촉진하는 새로운 경제 패러다임을 제시합니다.', '2024-11-01 10:30:00', 2),
 (3, '일상을 편하게 해줄 자기계발서를 추천받고 싶어요.', '마음을 편하게 하고 기분을 좋게 만드는 <즉시 기분을 바꿔드립니다>를 추천합니다.', '2024-11-01 11:00:00', 3),

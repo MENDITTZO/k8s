@@ -18,13 +18,13 @@ spec:
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
-              name: debook-secret
-              key: redis.data.host
+              name: api-key-secret
+              key: REDIS_DATA_HOST
         - name: REDIS_PORT
           valueFrom:
             secretKeyRef:
-              name: debook-secret
-              key: redis.data.port
+              name: api-key-secret
+              key: NjM3OQ==
   volumes:
     - name: redis-storage
       emptyDir: {}  # 임시 스토리지, Pod이 종료되면 데이터도 사라짐
