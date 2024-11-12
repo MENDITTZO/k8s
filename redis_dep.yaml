@@ -15,16 +15,16 @@ spec:
         - name: redis-storage
           mountPath: /data
       env:
-        - name: REDIS_HOST
+        - name: REDIS_DATA_HOST
           valueFrom:
             secretKeyRef:
               name: api-key-secret
               key: REDIS_DATA_HOST
-        - name: REDIS_PORT
+        - name: REDIS_DATA_PORT
           valueFrom:
             secretKeyRef:
               name: api-key-secret
-              key: NjM3OQ==
+              key: REDIS_DATA_PORT
   volumes:
     - name: redis-storage
       emptyDir: {}  # 임시 스토리지, Pod이 종료되면 데이터도 사라짐
